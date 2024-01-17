@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./node_modules/twig/twig.min.js"></script>
+    <title>Twig.js Performance Test</title>
+</head>
+<body>
+<script>
+function loadTemplate(templateName, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            callback(xhr.responseText);
+        }
+    };
+    xhr.open('GET', 'templates/' + templateName + '.twig', true);
+    xhr.send();
+}
+
+// Load all templates
+const templates = ['layout', 'heading', 'button', 'text', 'container', 'accordion-item', 'accordion' ];
+const loadedTemplates = {};
+let templatesLoaded = 0;
+
+const executionsCount = 1;
+const startTime = Date.now();
+for (let i = 0; i < executionsCount; i++) {
+    templates.forEach(function (template) {
+        loadTemplate(template, function (data) {
+            loadedTemplates[template] = data;
+            templatesLoaded++;
+
+            // If all templates are loaded, render the layout
+            if (templatesLoaded === templates.length) {
+                renderLayout();
+            }
+        });
+    });
+}
+const endTime = Date.now();
+const avgTime = ( endTime - startTime ) / executionsCount;
+
+document.body.innerHTML = `<h1>Twig.js Performance Test</h1><p>Time to load ${executionsCount} times: ${avgTime}ms</p>`;
+
+
+// Render the layout using Twig.js
+function renderLayout() {
+    const layoutTemplate = Twig.twig({data: loadedTemplates['layout']});
+    const headingTemplate = Twig.twig({data: loadedTemplates['heading']});
+    const buttonTemplate = Twig.twig({data: loadedTemplates['button']});
+    const textTemplate = Twig.twig({data: loadedTemplates['text']});
+    const containerTemplate = Twig.twig({data: loadedTemplates['container']});
+    const accordionTemplate = Twig.twig({data: loadedTemplates['accordion']});
+    const accordionItemTemplate = Twig.twig({data: loadedTemplates['accordion-item']});
+    console.log(accordionTemplate)
+    // Data for rendering components
+    const headingData = { tag: 'h1', classNames: ['my-class', 'another-class'], value: 'My Page' };
+    const heading = headingTemplate.render(headingData);
+    const heading2 = headingTemplate.render(headingData);
+
+    const buttonData = { classNames: ['btn', 'btn-primary'], content: 'Click Me' };
+    const button = buttonTemplate.render(buttonData);
+    const button2 = buttonTemplate.render(buttonData);
+
+    const textData = { classNames: ['text'], value: 'This is some text.' };
+    const text = textTemplate.render(textData);
+    const text2 = textTemplate.render(textData);
+
+
+    const containerData = { classNames: ['container'], children: [heading, button, text] };
+    const containerData2 = { classNames: ['container'], children: [heading2, button2, text2] };
+    const containerData3 = { classNames: ['container'], children: [text, heading, button ] };
+
+    const container = containerTemplate.render(containerData);
+    const container2 = containerTemplate.render(containerData2);
+    const container3 = containerTemplate.render(containerData3);
+
+    const accordionItemData = { classNames: ['accordion-item'], accordionTitle: [heading, heading2], accordionContent: [text, text2]};
+    const accordionItem = accordionItemTemplate.render(accordionItemData);
+    const accordionItem2 = accordionItemTemplate.render(accordionItemData);
+
+    const accordionData = { classNames: ['accordion'], children: [accordionItem, accordionItem2] };
+    const accordion = accordionTemplate.render(accordionData);
+
+
+
+    const appData = { classNames: ['app'], children: [container, container2, container3, accordion ] };
+    const layoutData = { pageTitle: 'Twig.js Performance Test', content: containerTemplate.render(appData) };
+
+    layoutTemplate.render(layoutData);
+}
+</script>
+</body>
+</html>

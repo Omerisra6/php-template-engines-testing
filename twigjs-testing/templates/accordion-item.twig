@@ -1,0 +1,14 @@
+<div class="e-accordion-item">
+    <button
+            class="{{ [ 'e-accordion-title' ] | merge( classNames ) | join( ' ' ) }}"
+            style="width: 100%;"
+    >
+        {{ accordionTitle | join }}
+    </button>
+    <div
+        class="{{ [ 'e-accordion-content' ] | merge( classNames ) | join( ' ' ) }}"
+        style="display: block; padding: 25px;"
+    >
+        {{ accordionContent | join }}
+    </div>
+</div>

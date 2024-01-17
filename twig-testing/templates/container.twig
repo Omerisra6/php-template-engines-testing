@@ -1,0 +1,5 @@
+<div
+    class="e-container {% if classNames is iterable %}{{ classNames | join(' ') }}{% endif %}"
+>
+    {{ children | join( '' ) | raw }}
+</div>

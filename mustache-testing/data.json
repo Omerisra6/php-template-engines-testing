@@ -1,0 +1,96 @@
+{
+  "heading1": {
+    "template": "heading",
+    "data": {
+      "value": "Heading 1",
+      "tag": "h1"
+    }
+  },
+  "heading2": {
+    "template": "heading",
+    "data": {
+      "value": "Heading 2",
+      "tag": "h1"
+    }
+  },
+  "button1": {
+    "template": "button",
+    "data": {
+      "value": "Button 1",
+      "classNames": ["btn", "btn-primary"]
+    }
+  },
+  "button2": {
+    "template": "button",
+    "data": {
+      "value": "Button 2",
+      "classNames": ["btn", "btn-primary"]
+    }
+  },
+  "text1": {
+    "template": "text",
+    "data": {
+      "value": "Text 1",
+      "classNames": ["text-primary"]
+    }
+  },
+  "text2": {
+    "template": "text",
+    "data": {
+      "value": "Text 2",
+      "classNames": ["text-primary"]
+    }
+  },
+  "container1": {
+    "template": "container",
+    "data": {
+      "classNames": ["container"],
+        "children": ["heading1", "button1", "text1"]
+    }
+  },
+  "container2": {
+      "template": "container",
+      "data": {
+          "classNames": ["container"],
+          "children": ["heading2", "button2", "text2"]
+      }
+  },
+  "container3": {
+    "template": "container",
+    "data": {
+      "classNames": ["container"],
+      "children": ["text1", "heading1", "button1"]
+    }
+  },
+  "accordion_item1": {
+    "template": "accordion-item",
+    "data": {
+      "title": "Accordion Item 1",
+      "accordionTitle": ["heading1", "heading2"],
+      "accordionContent": ["text1", "text2"],
+      "classNames": ["accordion-item"]
+    }
+  },
+  "accordion_item2": {
+    "template": "accordion-item",
+    "data": {
+      "title": "Accordion Item 2",
+      "accordionTitle": ["heading1", "heading2"],
+      "accordionContent": ["text1", "text2"],
+      "classNames": ["accordion-item"]
+    }
+  },
+  "accordion1": {
+    "template": "accordion",
+    "data": {
+      "classNames": ["accordion"],
+      "children": ["accordion_item1", "accordion_item2"]
+    }
+  },
+  "app": {
+    "template": "container",
+    "data": {
+      "children": ["container1", "container2", "container3", "accordion1"]
+    }
+  }
+}

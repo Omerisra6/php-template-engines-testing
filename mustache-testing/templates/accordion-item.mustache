@@ -1,0 +1,18 @@
+<div class="e-accordion-item">
+    <button
+            class="e-accordion-title {{#classNames}}{{.}}{{/classNames}}"
+            style="width: 100%;"
+    >
+        {{#accordionTitle}}
+            {{{.}}}
+        {{/accordionTitle}}
+    </button>
+    <div
+        class="e-accordion-content {{#classNames}}{{.}}{{/classNames}}"
+        style="display: flex; padding: 25px;"
+    >
+        {{#accordionContent}}
+            {{{.}}}
+        {{/accordionContent}}
+    </div>
+</div>

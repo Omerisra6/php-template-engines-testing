@@ -1,0 +1,13 @@
+{{#tag}}
+    <{{tag}} class="{{#classNames}}{{.}}{{/classNames}}">
+{{/tag}}
+{{^tag}}
+    <h2 class="{{#classNames}}{{.}}{{/classNames}}">
+{{/tag}}
+{{ value }}
+{{#tag}}
+    </{{tag}}>
+{{/tag}}
+{{^tag}}
+    </h2>
+{{/tag}}

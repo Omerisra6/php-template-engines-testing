@@ -1,0 +1,20 @@
+<div
+    class="e-tabs {{#classNames}}{{.}}{{/classNames}}"
+    style="width: 100%; border: 1px solid #ccc; background-color: #eee; padding: 10px;"
+    data-default-tab-title-id="{{ defaultTabTitleId }}"
+>
+    <div
+            class="e-tabs-titles"
+            style="display: flex; flex-direction: row; width: 50%; margin: auto; justify-content: space-around;"
+    >
+        {{#tabsTitles}}
+            {{.}}
+        {{/tabsTitles}}
+    </div>
+
+    <div class="e-tabs-contents" >
+        {{#tabsContents}}
+            {{.}}
+        {{/tabsContents}}
+    </div>
+</div>
